@@ -30,4 +30,7 @@ public class Order implements Serializable {
 
     @ManyToMany
     private List<Order> products = new ArrayList<>();
+
+    @OneToOne
+    private Invoice invoice;
 }
