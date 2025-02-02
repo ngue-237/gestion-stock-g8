@@ -17,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "orders")
 public class Order implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;

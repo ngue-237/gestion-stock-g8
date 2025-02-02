@@ -15,39 +15,39 @@ public class InvoiceController {
         this.invoiceService = invoiceService;
     }
 
-    @PostMapping
+    @PostMapping(path = "api/invoice/add")
     public ResponseEntity<String> addInvoice(@RequestBody Invoice invoice) {
         invoiceService.addInvoice(invoice);
         return ResponseEntity.ok("Invoice added successfully!");
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(path = "api/invoice/get_by_id/{id}")
     public ResponseEntity<Invoice> getInvoiceById(@PathVariable Integer id) {
         return ResponseEntity.ok(invoiceService.getInvoiceById(id));
     }
 
-    @GetMapping("/reference/{reference}")
+    @GetMapping(path= "/reference/{reference}")
     public ResponseEntity<Invoice> getInvoiceByReference(@PathVariable String reference) {
         return ResponseEntity.ok(invoiceService.getInvoiceByReference(reference));
     }
 
-    @GetMapping
+    @GetMapping(path = "api/invoice/get_all")
     public ResponseEntity<List<Invoice>> getAllInvoices() {
         return ResponseEntity.ok(invoiceService.getAllInvoices());
     }
 
-    @GetMapping("/status/{status}")
+    @GetMapping(path="/status/{status}")
     public ResponseEntity<List<Invoice>> getInvoicesByStatus(@PathVariable Boolean status) {
         return ResponseEntity.ok(invoiceService.getInvoicesByStatus(status));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(path="api/invoice/update_by_id/{id}")
     public ResponseEntity<String> updateInvoice(@PathVariable Integer id, @RequestBody Invoice invoice) {
         invoiceService.updateInvoice(id, invoice);
         return ResponseEntity.ok("Invoice updated successfully!");
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping(path="api/invoice/delete_by_id/{id}")
     public ResponseEntity<String> deleteInvoice(@PathVariable Integer id) {
         invoiceService.deleteInvoice(id);
         return ResponseEntity.ok("Invoice deleted successfully!");
