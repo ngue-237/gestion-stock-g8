@@ -36,10 +36,10 @@ public class InvoiceController {
         return ResponseEntity.ok(invoiceService.getAllInvoices());
     }
 
-    @GetMapping(path="/status/{status}")
+   /* @GetMapping(path="/status/{status}")
     public ResponseEntity<List<Invoice>> getInvoicesByStatus(@PathVariable Boolean status) {
         return ResponseEntity.ok(invoiceService.getInvoicesByStatus(status));
-    }
+    }*/
 
     @PutMapping(path="api/invoice/update_by_id/{id}")
     public ResponseEntity<String> updateInvoice(@PathVariable Integer id, @RequestBody Invoice invoice) {

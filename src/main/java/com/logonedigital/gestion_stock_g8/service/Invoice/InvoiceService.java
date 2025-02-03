@@ -10,7 +10,7 @@ public interface InvoiceService {
     Invoice getInvoiceById(int id);
     Invoice getInvoiceByReference(String reference);
     List<Invoice> getAllInvoices();
-    List<Invoice> getInvoicesByStatus(Boolean status);
+    //List<Invoice> getInvoicesByStatus(Boolean status);
     void updateInvoice(Integer id, Invoice invoice);
     void deleteInvoice(Integer id);
 }

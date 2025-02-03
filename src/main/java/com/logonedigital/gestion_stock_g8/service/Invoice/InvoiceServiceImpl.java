@@ -40,10 +40,10 @@ public class InvoiceServiceImpl implements InvoiceService{
         return invoiceRepo.findAll();
     }
 
-    @Override
+    /*@Override
     public List<Invoice> getInvoicesByStatus(Boolean status) {
         return invoiceRepo.findByStatus(status);
-    }
+    }*/
 
     @Override
     public void updateInvoice(Integer id, Invoice invoice) {
