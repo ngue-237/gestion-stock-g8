@@ -1,7 +1,12 @@
 package com.logonedigital.gestion_stock_g8.service.location;
 
+import com.logonedigital.gestion_stock_g8.dto.LocationReqDTO;
+import com.logonedigital.gestion_stock_g8.dto.LocationResDTO;
+import com.logonedigital.gestion_stock_g8.entities.Customer;
 import com.logonedigital.gestion_stock_g8.entities.Location;
 import com.logonedigital.gestion_stock_g8.exception.ResourceNotFoundException;
+import com.logonedigital.gestion_stock_g8.mapper.LocationMapper;
+import com.logonedigital.gestion_stock_g8.repositories.CustomerRepo;
 import com.logonedigital.gestion_stock_g8.repositories.LocationRepo;
 import org.springframework.stereotype.Service;
 
@@ -12,29 +17,42 @@ import java.util.Optional;
 @Service
 public class LocationServiceImpl implements LocationService{
     private final LocationRepo locationRepo;
+    private final CustomerRepo customerRepo;
+    private final LocationMapper locationMapper;
 
-    public LocationServiceImpl(LocationRepo locationRepo) {
+    public LocationServiceImpl(LocationRepo locationRepo, CustomerRepo customerRepo, LocationMapper locationMapper) {
         this.locationRepo = locationRepo;
+        this.customerRepo = customerRepo;
+        this.locationMapper = locationMapper;
     }
 
     @Override
-    public void addLocation(Location location) {
+    public void addLocation(LocationReqDTO locationReqDTO) {
+        Location location = this.locationMapper
+                .getLocationFromLocationReqDTO(locationReqDTO);
         location.setCreatedAt(new Date());
         location.setStatus(true);
+
+
+
+
         this.locationRepo.save(location);
     }
 
     @Override
-    public Location getLocationById(Integer locationId) {
+    public LocationResDTO getLocationById(Integer locationId) {
         Optional<Location> location = this.locationRepo.findById(locationId);
         if(location.isEmpty())
             throw  new ResourceNotFoundException("Resource not found !");
-        return location.get();
+        return this.locationMapper.getLocationResDTOFromlocation(location.get());
     }
 
     @Override
-    public List<Location> getLocation() {
-        return this.locationRepo.findAll();
+    public List<LocationResDTO> getLocation() {
+        return this.locationRepo.findAll()
+                .stream()
+                .map(location->this.locationMapper.getLocationResDTOFromlocation(location))
+                .toList();
     }
 
     @Override

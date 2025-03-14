@@ -24,11 +24,10 @@ public class Customer implements Serializable {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerId;
-    @NotEmpty(message = "please fill this !")
-    @NotNull(message = "This field can't be null")
+
     private String firstname;
     private String lastname;
-    @Email(message = "email isn't correct")
+
     private String email;
     private Date createdAt;
     private Date updatedAt;

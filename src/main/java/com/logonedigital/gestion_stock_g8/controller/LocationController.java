@@ -1,5 +1,7 @@
 package com.logonedigital.gestion_stock_g8.controller;
 
+import com.logonedigital.gestion_stock_g8.dto.LocationReqDTO;
+import com.logonedigital.gestion_stock_g8.dto.LocationResDTO;
 import com.logonedigital.gestion_stock_g8.entities.Location;
 import com.logonedigital.gestion_stock_g8.service.location.LocationService;
 import org.springframework.http.ResponseEntity;
@@ -17,8 +19,8 @@ public class LocationController {
     }
 
     @PostMapping(path = "api/location/add")
-    public ResponseEntity<String> addLocation(@RequestBody Location location){
-        this.locationService.addLocation(location);
+    public ResponseEntity<String> addLocation(@RequestBody LocationReqDTO locationReqDTO){
+        this.locationService.addLocation(locationReqDTO);
 
         return ResponseEntity
                 .status(201)
@@ -26,14 +28,14 @@ public class LocationController {
     }
 
     @GetMapping(path = "api/location/get_all")
-    public ResponseEntity<List<Location>> getLocations(){
+    public ResponseEntity<List<LocationResDTO>> getLocations(){
 
         return ResponseEntity
                 .status(200)
                 .body(this.locationService.getLocation());
     }
     @GetMapping(path = "api/location/get_by_id/{locationId}")
-    public ResponseEntity<Location> getLocation(@PathVariable Integer locationId){
+    public ResponseEntity<LocationResDTO> getLocation(@PathVariable Integer locationId){
 
         return ResponseEntity
                 .status(200)
